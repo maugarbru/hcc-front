@@ -1,5 +1,20 @@
 <template>
-  <div>
+  <v-container>
+    <v-layout justify-center align-center>
+      <v-flex xs12>
+        <v-parallax
+          dark
+          :src="require('~/assets/img/background.png')"
+          height="200"
+        >
+          <v-row align="center" justify="center">
+            <v-col class="text-center" cols="12">
+              <inspire />
+            </v-col>
+          </v-row>
+        </v-parallax>
+      </v-flex>
+    </v-layout>
     <v-layout justify-center align-center class="black">
       <v-item-group>
         <v-container>
@@ -8,11 +23,11 @@
               v-for="(item, index) in items"
               :key="index"
               cols="12"
-              md="6"
+              md="4"
               lg="6"
             >
               <v-item>
-                <v-card class="mx-auto" outlined :to="item.to">
+                <v-card class="mx-auto" outlined :to="item.to" height="200">
                   <v-list-item three-line>
                     <v-list-item-content>
                       <div class="overline mb-4 info--text">
@@ -24,9 +39,6 @@
                       >
                         <h1>{{ item.title }}</h1>
                       </v-list-item-title>
-                      <v-list-item-subtitle>{{
-                        item.subtitle
-                      }}</v-list-item-subtitle>
                     </v-list-item-content>
                   </v-list-item>
                 </v-card>
@@ -36,21 +48,7 @@
         </v-container>
       </v-item-group>
     </v-layout>
-    <v-layout justify-center align-center>
-      <v-flex xs12>
-        <v-parallax
-          dark
-          :src="require('~/assets/img/background.png')"
-        >
-          <v-row align="center" justify="center">
-            <v-col class="text-center" cols="12">
-              <inspire />
-            </v-col>
-          </v-row>
-        </v-parallax>
-      </v-flex>
-    </v-layout>
-  </div>
+  </v-container>
 </template>
 
 <script>
@@ -68,14 +66,12 @@ export default {
       items: [
         {
           title: 'Movies',
-          description: 'Drawings, illustrations...',
-          subtitle: 'Last works. Click to see more',
+          description: 'Movies',
           to: '/art',
         },
         {
-          title: 'Blog',
-          description: 'Opinion, reviews...',
-          subtitle: 'Last publications. Click to see more',
+          title: 'Games',
+          description: 'Videogames',
           to: '/blog',
         },
       ],

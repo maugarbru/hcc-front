@@ -11,9 +11,7 @@
       <v-spacer />
     </v-app-bar>
 
-    <v-main class="grey darken-3">
-      <v-container><nuxt /></v-container>
-    </v-main>
+    <v-main class="black"><nuxt /> </v-main>
 
     <v-footer padless>
       <v-col class="text-center" cols="12">
