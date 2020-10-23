@@ -52,7 +52,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 import config from '~/assets/config.js'
 import Inspire from '~/components/Inspire.vue'
 
@@ -67,12 +66,12 @@ export default {
         {
           title: 'Movies',
           description: 'Movies',
-          to: '/art',
+          to: '/movies',
         },
         {
           title: 'Games',
           description: 'Videogames',
-          to: '/blog',
+          to: '/games',
         },
       ],
     }

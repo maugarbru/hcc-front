@@ -1,7 +1,7 @@
 <template>
   <v-app dark>
-    <v-app-bar fixed app color="black">
-      <v-app-bar-nav-icon></v-app-bar-nav-icon>
+    <v-app-bar fixed app color="grey darken-4">
+      <!-- <v-app-bar-nav-icon></v-app-bar-nav-icon> -->
       <v-spacer />
       <v-img
         max-height="60"
@@ -13,7 +13,7 @@
 
     <v-main class="black"><nuxt /> </v-main>
 
-    <v-footer padless>
+    <v-footer padless color="grey darken-4">
       <v-col class="text-center" cols="12">
         <small>
           {{ new Date().getFullYear() }} —

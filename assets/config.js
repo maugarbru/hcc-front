@@ -1,9 +1,9 @@
 let config = {
   api: {
-    // Server
-    url: 'https://art-portfolio-api.herokuapp.com/api/v1/',
     // Local
-    // url: 'http://localhost:3001/api/v1/',
+    url: 'http://localhost:3001/api/v1/',
+    src: 'https://image.tmdb.org/t/p/w500',
+    movies_path: 'D:\\utorrent\\'
   },
   routes: [
     {
