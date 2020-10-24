@@ -1,26 +1,34 @@
 <template>
   <v-card>
     <v-img
+      v-if="item.info.artworks"
       max-height="500"
-      :lazy-src="src_path + item.info.backdrop_path"
-      :src="src_path + item.info.backdrop_path"
+      :lazy-src="src_path + item.info.artworks[0].image_id + '.jpg'"
+      :src="src_path + item.info.artworks[0].image_id + '.jpg'"
+    >
+    </v-img>
+    <v-img
+      v-else
+      max-height="500"
+      :lazy-src="src_path + item.info.cover.image_id + '.jpg'"
+      :src="src_path + item.info.cover.image_id + '.jpg'"
     >
     </v-img>
     <v-container>
       <v-row class="mx-auto">
         <v-col cols="12" sm="6">
           <h1>
-            {{ item.info.title }}
+            {{ item.info.name }}
           </h1>
-          <span class="primary--text mr-0" style="font-size: 1rem;">
+          <!-- <span class="primary--text mr-0" style="font-size: 1rem;">
             {{ item.info.release_date.slice(0, 4) }}
-          </span>
+          </span> -->
         </v-col>
       </v-row>
       <v-container>
         <v-chip-group class="mx-auto" column
           ><v-chip
-            v-for="(genre, index) in item.info.genre_ids"
+            v-for="(genre, index) in item.info.genres"
             :key="index"
             draggable
             outlined
@@ -33,7 +41,7 @@
       </v-container>
       <v-container
         ><blockquote align="justify">
-          {{ item.info.overview }}
+          {{ item.info.summary }}
         </blockquote></v-container
       >
     </v-container>
@@ -43,7 +51,7 @@
       <div>
         <v-row class="mx-auto">
           <v-rating
-            v-model="item.info.vote_average"
+            v-model="item.info.rating"
             :length="10"
             background-color="grey lighten-3"
             color="primary"
@@ -53,9 +61,7 @@
           ></v-rating>
         </v-row>
         <div align="center" class="grey--text mx-auto">
-          <small
-            >{{ item.info.vote_average }} ({{ item.info.vote_count }})</small
-          >
+          <small>{{ item.info.rating }} ({{ item.info.rating_count }})</small>
         </div>
       </div>
       <v-spacer />
@@ -73,7 +79,8 @@ export default {
   },
   data() {
     return {
-      src_path: config.api.src_movie_backdrop,
+      src_path: config.api.src_game,
+      src_path2: config.api.src_game2,
     }
   },
   methods: {},

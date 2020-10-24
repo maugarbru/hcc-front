@@ -16,7 +16,7 @@
       </v-dialog>
 
       <v-dialog v-model="modal" max-width="800">
-        <movie v-if="item.info" :item="item" />
+        <game v-if="item.info" :item="item" />
       </v-dialog>
 
       <v-item-group>
@@ -40,8 +40,8 @@
                 >
                   <v-img
                     height="500"
-                    :lazy-src="src_path + item.info.poster_path"
-                    :src="src_path + item.info.poster_path"
+                    :lazy-src="src_path + item.info.cover.image_id + '.jpg'"
+                    :src="src_path + item.info.cover.image_id + '.jpg'"
                   >
                   </v-img>
                 </v-card>
@@ -57,33 +57,33 @@
 <script>
 import axios from 'axios'
 import config from '~/assets/config.js'
-import Movie from '~/components/Movie.vue'
+import Game from '~/components/Game.vue'
 
 export default {
   components: {
-    Movie,
+    Game,
   },
   async mounted() {
-    let prom = await this.getMovies()
+    let prom = await this.getGames()
   },
   data() {
     return {
       items: [],
       loading: false,
-      src_path: config.api.src_movie_cover,
+      src_path: config.api.src_game,
       modal: false,
       item: {},
     }
   },
   methods: {
-    async getMovies() {
+    async getGames() {
       let response = []
       this.loading = true
       let url = config.api.url + 'files/'
       let prom = await axios
         .post(url, {
-          path: config.api.movies_path,
-          type: 'movies',
+          path: config.api.games_path,
+          type: 'games',
         })
         .catch(function (error) {
           console.log(error)
@@ -95,6 +95,7 @@ export default {
       this.items = response
     },
     openDialog(item) {
+      console.log(item);
       this.modal = true
       this.item = item
     },
