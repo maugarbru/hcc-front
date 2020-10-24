@@ -30,7 +30,7 @@
                 <v-card class="mx-auto" outlined :to="item.to" height="200">
                   <v-list-item three-line>
                     <v-list-item-content>
-                      <div class="overline mb-4 secondary--text">
+                      <div class="overline mb-4 grey--text">
                         {{ item.description }}
                       </div>
                       <v-list-item-title
