@@ -18,7 +18,7 @@
         <small>
           {{ new Date().getFullYear() }} —
           <i>Designed and developed by</i>
-          <strong @click.stop="right_drawer = !right_drawer">@MGBrunal</strong>
+          <a href="https://mgbrunal.github.io" target="_blank"><strong>@MGBrunal</strong></a>
         </small>
       </v-col>
     </v-footer>

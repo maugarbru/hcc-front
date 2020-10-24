@@ -11,22 +11,7 @@ let config = {
       icon: 'mdi-home',
       title: 'Home',
       to: '/',
-    },
-    {
-      icon: 'mdi-draw',
-      title: 'Art Gallery',
-      to: '/art',
-    },
-    {
-      icon: 'mdi-chart-bubble',
-      title: 'Blog',
-      to: '/blog',
-    },
-    {
-      icon: 'mdi-store',
-      title: 'Catalogue',
-      to: '/catalogue',
-    },
+    }
   ]
 }
 

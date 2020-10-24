@@ -7,7 +7,7 @@
             <center>
               <v-progress-circular
                 indeterminate
-                color="secondary"
+                color="primary"
                 class="mb-0"
               ></v-progress-circular>
             </center>

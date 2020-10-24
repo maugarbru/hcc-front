@@ -18,7 +18,7 @@
               :key="index"
               draggable
               outlined
-              color="yellow darken-3"
+              color="primary"
               class="white--text"
             >
               {{ genre.name }}
@@ -40,7 +40,7 @@
           v-model="item.info.vote_average"
           :length="10"
           background-color="grey lighten-3"
-          color="yellow darken-3"
+          color="primary"
           readonly
           small
         ></v-rating>

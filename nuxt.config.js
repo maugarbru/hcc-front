@@ -16,7 +16,7 @@ export default {
    ** See https://nuxtjs.org/api/configuration-head
    */
   head: {
-    titleTemplate: 'HCC (House Central Computer)',
+    titleTemplate: 'HCC [House Central Computer]',
     title: "House Central Computer",
     meta: [
       { charset: 'utf-8' },
@@ -61,9 +61,9 @@ export default {
       dark: true,
       themes: {
         dark: {
-          primary: "#41626E",
+          primary: colors.yellow.darken4,
           accent: colors.grey.darken3,
-          secondary: "#7BBAD1",
+          secondary: colors.yellow.base,
           info: colors.teal.lighten1,
           warning: colors.amber.base,
           error: colors.deepOrange.accent4,
