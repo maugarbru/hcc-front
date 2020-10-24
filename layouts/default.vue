@@ -1,6 +1,6 @@
 <template>
   <v-app dark>
-    <v-app-bar fixed app color="grey darken-4">
+    <v-app-bar fixed app color="grey darken-4" height="80">
       <!-- <v-app-bar-nav-icon></v-app-bar-nav-icon> -->
       <v-spacer />
       <v-img

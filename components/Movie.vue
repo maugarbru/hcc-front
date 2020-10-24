@@ -9,23 +9,28 @@
     <v-container>
       <v-row class="mx-auto">
         <v-col cols="12" sm="6">
-          <h1>{{ item.info.title }}</h1>
-        </v-col>
-        <v-col cols="12" sm="6">
-          <v-chip-group class="mx-auto" show-arrows
-            ><v-chip
-              v-for="(genre, index) in item.info.genre_ids"
-              :key="index"
-              draggable
-              outlined
-              color="primary"
-              class="white--text"
-            >
-              {{ genre.name }}
-            </v-chip></v-chip-group
-          >
+          <h1>
+            {{ item.info.title }}
+          </h1>
+          <span class="primary--text mr-0" style="font-size: 1rem;">
+            {{ item.info.release_date.slice(0, 4) }}
+          </span>
         </v-col>
       </v-row>
+      <v-container>
+        <v-chip-group class="mx-auto" column
+          ><v-chip
+            v-for="(genre, index) in item.info.genre_ids"
+            :key="index"
+            draggable
+            outlined
+            color="primary"
+            class="white--text"
+          >
+            {{ genre.name }}
+          </v-chip></v-chip-group
+        >
+      </v-container>
       <v-container
         ><blockquote align="justify">
           {{ item.info.overview }}
@@ -35,20 +40,23 @@
     <v-divider></v-divider>
     <v-card-actions>
       <v-spacer />
-      <v-row class="mx-auto">
-        <v-rating
-          v-model="item.info.vote_average"
-          :length="10"
-          background-color="grey lighten-3"
-          color="primary"
-          readonly
-          small
-        ></v-rating>
-
-        <div class="grey--text ml-4">
-          {{ item.info.vote_average }} ({{ item.info.vote_count }})
+      <div>
+        <v-row class="mx-auto">
+          <v-rating
+            v-model="item.info.vote_average"
+            :length="10"
+            background-color="grey lighten-3"
+            color="primary"
+            readonly
+            small
+          ></v-rating>
+        </v-row>
+        <div align="center" class="grey--text mx-auto">
+          <small
+            >{{ item.info.vote_average }} ({{ item.info.vote_count }})</small
+          >
         </div>
-      </v-row>
+      </div>
       <v-spacer />
     </v-card-actions>
   </v-card>
