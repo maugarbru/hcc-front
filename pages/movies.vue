@@ -14,9 +14,35 @@
           </v-container>
         </v-card>
       </v-dialog>
+      <v-app-bar
+        style="opacity: 0.9;"
+        light
+        v-if="playing && !modal"
+        dense
+        fixed
+        bottom
+        color="primary"
+      >
+        <v-icon left>mdi-movie-open</v-icon>
+        <v-toolbar-title
+          ><i
+            >Now playing: <strong>{{ item_playing.info.title }}</strong></i
+          ></v-toolbar-title
+        >
+        <v-spacer></v-spacer>
+        <v-btn dark color="red darken-3" @click="stopMovie(item_playing)"
+          >Stop movie <v-icon>mdi-stop</v-icon></v-btn
+        >
+      </v-app-bar>
 
       <v-dialog v-model="modal" max-width="800">
-        <movie v-if="item.info" :item="item" />
+        <movie
+          v-if="item.info"
+          :item="item"
+          :playing="playing"
+          :playing_this="playing_this"
+          @change="changeStatus"
+        />
       </v-dialog>
 
       <v-item-group>
@@ -70,9 +96,12 @@ export default {
     return {
       items: [],
       loading: false,
+      playing: false,
+      item_playing: undefined,
       src_path: config.api.src_movie_cover,
       modal: false,
       item: {},
+      playing_this: false,
     }
   },
   methods: {
@@ -94,9 +123,42 @@ export default {
       this.loading = false
       this.items = response
     },
+    async stopMovie(movie) {
+      this.loading = true
+      let url = config.api.url + 'files/close'
+      let prom = await axios
+        .post(url, {
+          type: 'video',
+        })
+        .catch(function (error) {
+          console.log(error)
+        })
+      this.playing_this = false
+      this.item_playing = undefined
+      this.playing = false
+      this.loading = false
+    },
     openDialog(item) {
+      if (this.item_playing) {
+        if (item.info.id == this.item_playing.info.id) {
+          this.playing_this = true
+        } else {
+          this.playing_this = false
+        }
+      }
       this.modal = true
       this.item = item
+    },
+    changeStatus(state) {
+      if (state.playing) {
+        this.item_playing = state.movie
+        this.playing_this = true
+        this.playing = true
+      } else {
+        this.item_playing = undefined
+        this.playing_this = false
+        this.playing = false
+      }
     },
   },
 }
