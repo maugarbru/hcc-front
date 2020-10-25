@@ -15,7 +15,6 @@
         </v-card>
       </v-dialog>
       <v-app-bar
-        style="opacity: 0.9;"
         light
         v-if="playing && !modal"
         dense
@@ -24,10 +23,9 @@
         color="primary"
       >
         <v-icon left>mdi-movie-open</v-icon>
-        <v-toolbar-title
-          ><i
-            >Now playing: <strong>{{ item_playing.info.title }}</strong></i
-          ></v-toolbar-title
+        <v-toolbar-title class="mx-auto"
+          ><i>Now playing:</i>
+          <strong>{{ item_playing.info.title }}</strong></v-toolbar-title
         >
         <v-spacer></v-spacer>
         <v-btn dark color="red darken-3" @click="stopMovie(item_playing)"
