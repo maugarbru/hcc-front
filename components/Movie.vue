@@ -42,7 +42,7 @@
               block
               @click="playMovie(item)"
             >
-              Play this movie instead
+              Play this movie
               <v-icon right>mdi-play</v-icon>
             </v-btn>
           </v-col>

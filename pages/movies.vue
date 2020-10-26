@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-layout justify-center align-center class="black">
+    <v-layout justify-center align-center>
       <v-dialog v-model="loading" persistent width="100">
         <v-card color="black" dark>
           <v-container>
@@ -72,11 +72,13 @@
                 <v-card
                   @click="openDialog(item)"
                   class="mx-auto poster"
+                  max-width="350"
                   :elevation="hover ? 12 : 2"
                   :class="{ 'on-hover': hover }"
                 >
                   <v-img
-                    height="500"
+                    min-height="450"
+                    min-width="280"
                     :lazy-src="src_path + item.info.poster_path"
                     :src="src_path + item.info.poster_path"
                   >
