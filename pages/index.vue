@@ -17,18 +17,20 @@
           <v-row xs12>
             <v-col v-for="(item, index) in items" :key="index" cols="12" md="6">
               <v-item>
-                <v-card class="mx-auto" outlined :to="item.to" height="200">
+                <v-card class="mx-auto" outlined :to="item.to" max-height="200">
                   <v-list-item three-line>
                     <v-list-item-content>
                       <div class="overline mb-4 grey--text">
-                        <v-icon color="primary" left>{{ item.icon }}</v-icon
-                        >{{ item.title }}
+                        <i>Go to <strong>{{ item.title }}</strong></i>
                       </div>
                       <v-list-item-title
                         class="headline mb-1 white--text"
                         style="text-shadow: 0px 0px 10px black;"
                       >
-                        <h1>{{ item.title }}</h1>
+                        <h1>
+                          <v-icon large color="primary" left>{{ item.icon }}</v-icon
+                          >{{ item.title }}
+                        </h1>
                       </v-list-item-title>
                     </v-list-item-content>
                   </v-list-item>
