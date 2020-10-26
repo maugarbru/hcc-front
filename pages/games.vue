@@ -14,9 +14,28 @@
           </v-container>
         </v-card>
       </v-dialog>
+      <v-app-bar
+        v-if="playing && !modal"
+        dense
+        fixed
+        bottom
+        color="green darken-3"
+      >
+        <v-icon left>mdi-gamepad-variant</v-icon>
+        <v-toolbar-title class="mx-auto"
+          ><i>Game started:</i>
+          <strong>{{ item_playing.info.name }}</strong></v-toolbar-title
+        >
+        <v-spacer></v-spacer>
+      </v-app-bar>
 
       <v-dialog v-model="modal" max-width="800">
-        <game v-if="item.info" :item="item" />
+        <game
+          v-if="item.info"
+          :item="item"
+          :playing="playing"
+          @change="changeStatus"
+        />
       </v-dialog>
 
       <v-item-group>
@@ -73,6 +92,8 @@ export default {
       src_path: config.api.src_game,
       modal: false,
       item: {},
+      playing: false,
+      item_playing: undefined,
     }
   },
   methods: {
@@ -95,9 +116,17 @@ export default {
       this.items = response
     },
     openDialog(item) {
-      console.log(item);
       this.modal = true
       this.item = item
+    },
+    changeStatus(state) {
+      if (state.playing) {
+        this.item_playing = state.game
+        this.playing = true
+      } else {
+        this.item_playing = undefined
+        this.playing = false
+      }
     },
   },
 }

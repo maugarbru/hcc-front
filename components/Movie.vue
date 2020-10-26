@@ -28,7 +28,7 @@
             <v-icon right>mdi-play</v-icon>
           </v-btn>
         </v-col>
-        <div v-if="playing && !playing_this">
+        <v-row class="mx-auto" v-if="playing && !playing_this">
           <v-col cols="12" class="mb-n6">
             <small class="secondary--text"
               ><i>A movie is playing already</i>
@@ -46,14 +46,26 @@
               <v-icon right>mdi-play</v-icon>
             </v-btn>
           </v-col>
-        </div>
-        <div v-if="playing_this">
+        </v-row>
+        <v-row class="mx-auto" v-if="playing_this">
           <v-col cols="12" class="mb-n6">
             <small class="green--text"
               ><i>This movie is playing right now!</i>
             </small>
           </v-col>
-        </div>
+          <v-col cols="12">
+            <v-btn
+              :loading="loading"
+              class="mx-auto"
+              color="red darken-3"
+              block
+              @click="stopMovie(item)"
+            >
+              Stop movie
+              <v-icon right>mdi-stop</v-icon>
+            </v-btn>
+          </v-col>
+        </v-row>
       </v-row>
       <v-container>
         <v-chip-group class="mx-auto" column
@@ -109,18 +121,19 @@ export default {
   props: {
     item: Object,
     playing: Boolean,
-    playing_this: Boolean
+    playing_this: Boolean,
   },
   data() {
     return {
       src_path: config.api.src_movie_backdrop,
       loading: false,
-      play: false
+      play: false,
     }
   },
   methods: {
     async playMovie(movie) {
       this.loading = true
+      let self = this
       let url = config.api.url + 'files/open'
       let prom = await axios
         .post(url, {
@@ -130,11 +143,32 @@ export default {
         .catch(function (error) {
           console.log(error)
         })
-      this.$emit('change', {
-        movie: movie,
-        playing: true,
-      })
-      this.loading = false
+
+      setTimeout(() => {
+        self.$emit('change', {
+          movie: movie,
+          playing: true,
+        })
+        self.loading = false
+      }, 1500)
+    },
+    async stopMovie(movie) {
+      this.loading = true
+      let self = this
+      let url = config.api.url + 'files/close'
+      let prom = await axios
+        .post(url, {
+          type: 'video',
+        })
+        .catch(function (error) {
+          console.log(error)
+        })
+      setTimeout(() => {
+        self.$emit('change', {
+          playing: false,
+        })
+        self.loading = false
+      }, 1500)
     },
   },
 }

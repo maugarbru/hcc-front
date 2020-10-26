@@ -24,6 +24,22 @@
             {{ item.info.release_date.slice(0, 4) }}
           </span> -->
         </v-col>
+        <v-col v-if="!playing" cols="12" sm="6">
+          <v-btn
+            :loading="loading"
+            block
+            color="green darken-3"
+            @click="playGame(item)"
+          >
+            Start game
+            <v-icon right>mdi-gamepad-variant</v-icon>
+          </v-btn>
+        </v-col>
+        <v-col v-else cols="12" sm="6">
+          <v-col cols="12">
+            <small class="green--text"><i>Game started!</i> </small>
+          </v-col>
+        </v-col>
       </v-row>
       <v-container>
         <v-chip-group class="mx-auto" column
@@ -81,8 +97,35 @@ export default {
     return {
       src_path: config.api.src_game,
       src_path2: config.api.src_game2,
+      playing: false,
+      loading: false,
     }
   },
-  methods: {},
+  methods: {
+    async playGame(game) {
+      this.loading = true
+      let self = this
+      let url = config.api.url + 'files/open'
+      let prom = await axios
+        .post(url, {
+          path: config.api.games_path + game.path,
+          type: 'game',
+        })
+        .catch(function (error) {
+          console.log(error)
+        })
+      setTimeout(() => {
+        self.$emit('change', {
+          game: game,
+          playing: true,
+        })
+        self.playing = true
+        self.loading = false
+        setTimeout(() => {
+          self.playing = false
+        }, 5000)
+      }, 1500)
+    },
+  },
 }
 </script>

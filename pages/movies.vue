@@ -15,21 +15,21 @@
         </v-card>
       </v-dialog>
       <v-app-bar
-        light
         v-if="playing && !modal"
         dense
         fixed
         bottom
-        color="primary"
+        color="green darken-3"
       >
         <v-icon left>mdi-movie-open</v-icon>
         <v-toolbar-title class="mx-auto"
-          ><i>Now playing:</i>
+          ><i>Playing:</i>
           <strong>{{ item_playing.info.title }}</strong></v-toolbar-title
         >
         <v-spacer></v-spacer>
-        <v-btn dark color="red darken-3" @click="stopMovie(item_playing)"
-          >Stop movie <v-icon>mdi-stop</v-icon></v-btn
+        <v-btn small dark color="red darken-3" @click="stopMovie(item_playing)">
+          <span class="d-none d-sm-flex">Stop movie</span
+          ><v-icon>mdi-stop</v-icon></v-btn
         >
       </v-app-bar>
 

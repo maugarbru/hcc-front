@@ -11,9 +11,14 @@ let config = {
   },
   routes: [
     {
-      icon: 'mdi-home',
-      title: 'Home',
-      to: '/',
+      icon: 'mdi-movie-open',
+      title: 'Movies',
+      to: '/movies',
+    },
+    {
+      icon: 'mdi-gamepad-variant',
+      title: 'Games',
+      to: '/games',
     }
   ]
 }

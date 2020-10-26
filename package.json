@@ -4,10 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "nuxt",
-    "build": "nuxt build",
-    "start": "nuxt start",
-    "export": "nuxt export",
-    "serve": "nuxt serve",
+    "start": "nuxt build && nuxt start",
     "generate": "nuxt build --target static && nuxt export"
   },
   "dependencies": {
