@@ -14,6 +14,7 @@
           </v-container>
         </v-card>
       </v-dialog>
+
       <v-app-bar
         v-if="playing && !modal"
         dense
@@ -44,6 +45,18 @@
       </v-dialog>
 
       <v-item-group>
+        <v-toolbar color="transparent">
+          <v-spacer></v-spacer>
+          <v-text-field
+            placeholder="Search movie by name"
+            append-icon="mdi-magnify"
+            class="mt-5"
+            solo
+            clearable
+            v-model="filter_name"
+          ></v-text-field>
+          <v-spacer></v-spacer>
+        </v-toolbar>
         <v-row xs12>
           <v-col
             v-for="(item, index) in items"
@@ -92,15 +105,33 @@ export default {
   },
   data() {
     return {
-      items: [],
       loading: false,
       playing: false,
+      filter: false,
+      modal: false,
+      playing_this: false,
+
+      item: {},
+      items: [],
+      allItems: [],
+      categories: [],
+
       item_playing: undefined,
       src_path: config.api.src_movie_cover,
-      modal: false,
-      item: {},
-      playing_this: false,
+
+      filter_name: '',
     }
+  },
+  watch: {
+    filter_name() {
+      if (this.filter_name == null || this.filter_name.length == 0) {
+        this.items = this.allItems
+      } else {
+        this.items = this.allItems.filter((item) =>
+          item.info.title.toLowerCase().includes(this.filter_name.toLowerCase())
+        )
+      }
+    },
   },
   methods: {
     async getMovies() {
@@ -120,6 +151,7 @@ export default {
       }
       this.loading = false
       this.items = response
+      this.allItems = response
     },
     async stopMovie(movie) {
       this.loading = true

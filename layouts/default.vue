@@ -17,15 +17,11 @@
       <v-spacer></v-spacer>
     </v-app-bar>
 
-    <v-navigation-drawer v-model="drawer" app>
+    <v-navigation-drawer v-model="drawer" temporary app>
       <v-list-item>
         <v-list-item-content>
           <v-list-item-title class="my-3">
-            <v-img
-              contain
-              max-height="60"
-              :src="require('~/static/logo.png')"
-            >
+            <v-img contain max-height="60" :src="require('~/static/logo.png')">
             </v-img>
           </v-list-item-title>
           <v-list-item-title class="my-6">

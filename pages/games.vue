@@ -14,6 +14,7 @@
           </v-container>
         </v-card>
       </v-dialog>
+
       <v-app-bar
         v-if="playing && !modal"
         dense
@@ -39,6 +40,18 @@
       </v-dialog>
 
       <v-item-group>
+        <v-toolbar color="transparent">
+          <v-spacer></v-spacer>
+          <v-text-field
+            placeholder="Search game by name"
+            append-icon="mdi-magnify"
+            class="mt-5"
+            solo
+            clearable
+            v-model="filter_name"
+          ></v-text-field>
+          <v-spacer></v-spacer>
+        </v-toolbar>
         <v-row xs12>
           <v-col
             v-for="(item, index) in items"
@@ -88,13 +101,29 @@ export default {
   data() {
     return {
       items: [],
-      loading: false,
-      src_path: config.api.src_game,
-      modal: false,
+      allItems: [],
       item: {},
+
+      loading: false,
+      modal: false,
       playing: false,
+
       item_playing: undefined,
+      src_path: config.api.src_game,
+
+      filter_name: '',
     }
+  },
+  watch: {
+    filter_name() {
+      if (this.filter_name == null || this.filter_name.length == 0) {
+        this.items = this.allItems
+      } else {
+        this.items = this.allItems.filter((item) =>
+          item.info.name.toLowerCase().includes(this.filter_name.toLowerCase())
+        )
+      }
+    },
   },
   methods: {
     async getGames() {
@@ -114,6 +143,7 @@ export default {
       }
       this.loading = false
       this.items = response
+      this.allItems = response
     },
     openDialog(item) {
       this.modal = true
